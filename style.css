@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  display: flex;
+  font-family: sans-serif;
+  background: #111;
+  color: #eee;
+}
+#sidebar {
+  width: 200px;
+  background: #222;
+  padding: 10px;
+  box-sizing: border-box;
+}
+#sidebar h2 {
+  margin: 0.5em 0 0.2em 0;
+}
+main {
+  display: flex;
+  flex-direction: row;    /* single row with two columns: single-run + grid */
+  align-items: flex-start;
+  gap: 20px;              /* space between them */
+  margin: 10px;
+}
+
+#singleRunContainer {
+  display: flex;
+  flex-direction: column; /* title above the image */
+  align-items: center;
+  text-align: center;
+  border: 2px solid #333; /* optional border so it looks consistent with the grid */
+  padding: 10px;
+  background: #222;
+}
+
+.runTitle {  /* optional styling for the single run title */
+  margin: 0 0 0.5em 0;
+}
+
+#plot {
+  max-width: 200px;  /* to match the comparison images */
+  border: 2px solid #333;
+}
+
+#comparisonGrid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  /* the rest of your existing styles, e.g. margin: 1em; etc. */
+}
+
+#comparisonGrid img {
+  max-width: 200px;
+  display: block;
+  border: 2px solid #333;
+}
+figure {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* Lightbox modal */
+#imageModal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  overflow: hidden; /* Important for panning inside the modal */
+  background-color: rgba(0,0,0,0.9);
+  text-align: center;
+}
+#modalClose {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+}
+#modalImg {
+  position: absolute; /* So we can freely translate/scale */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  cursor: grab; /* indicates panning available */
+}
+#modalImg:active {
+  cursor: grabbing;
+}
+#zoomHelp {
+  position: absolute;
+  bottom: 20px;
+  left: 0; 
+  right: 0;
+  color: #aaa;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  pointer-events: none; /* let clicks go “through” this text */
+}
+
+#timeLabel {
+  display: inline-block;
+  min-width: 50px;      /* or more */
+  white-space: normal;  /* ensure it doesn’t collapse text */
+  overflow: visible;    /* disable text-overflow: ellipsis */
+}
+
+#comparisonGrid {
+  display: flex;
+  flex-wrap: nowrap;   /* one row; columns flow horizontally */
+  gap: 10px;           /* some spacing between columns */
+  margin: 1em;         /* optional margin around the grid */
+}
+
+#comparisonGrid img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  border: 2px solid #333;
+}
+
+#singleRunContainer img,
+#comparisonGrid img {
+  display: block;
+  width: 100%;          /* let the container decide actual width, up to the max below */
+  max-width: 600px;     /* set your desired max scale (e.g., 600px) */
+  height: auto;
+  object-fit: contain;  /* optional: ensures full image is visible without cropping */
+}
+
+/* (Optional) Let #singleRunContainer or #comparisonGrid define a max-width */
+#singleRunContainer {
+  max-width: 600px; /* or some other container limit */
+  width: 100%;
+  /* other existing styles */
+}
+
+#comparisonGrid {
+  /* to allow images to use full column width in each column */
+  flex: 1; 
+  /* other existing styles */
+}
+
+@media (max-width: 600px) {
+  #comparisonGrid {
+    flex-wrap: wrap;
+  }
+  #comparisonGrid > div {
+    width: 100%;
+    max-width: none;
+  }
+}

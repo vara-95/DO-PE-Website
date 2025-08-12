@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DO-PE Convergence Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside id="sidebar">
+    <h2>Run ID</h2>
+    <select id="runSelect"></select>
+
+    <h2>Convergence</h2>
+    <select id="convSelect">
+      <option value="mean">mean</option>
+      <option value="mean_diff">mean_diff</option>
+      <option value="mean_diff_ext">mean_diff_ext</option>
+    </select>
+
+    <h2>Variable</h2>
+    <select id="varSelect">
+      <option value="vel">vel</option>
+      <option value="temp">temp</option>
+      <option value="salt">salt</option>
+      <option value="eta">eta</option>
+    </select>
+    
+    <h2>Elevation</h2>
+    <select id="elevSelect"></select>
+
+    <h2>Time</h2>
+    <input type="range" id="timeRange" value="1" min="1" max="21" step="1" />
+    <output id="timeLabel" style="margin-left:6px;"></output>
+    <br />
+    <button id="loadBtn">Load</button>
+
+    <hr>
+
+    <!-- Comparison grid controls -->
+    <h2>Comparison Grid</h2>
+    <label>Number of Run IDs:</label>
+    <input type="number" id="gridCount" min="1" max="999" value="3" style="width:60px;" />
+    <!-- New container for dynamic run-drop-downs -->
+    <div id="gridSelectContainer"></div>
+    <button id="compareBtn">Compare</button>
+  </aside>
+
+  <main>
+    <!-- Single-run container -->
+    <div id="singleRunContainer">
+      <h3 id="singleRunHeading" class="runTitle"></h3>
+      <img id="plot" alt="DO‑PE plot" loading="lazy">
+    </div>
+
+    <!-- Container for multiple-run images -->
+    <div id="comparisonGrid"></div>
+  </main>
+
+  <!-- Zoom modal -->
+  <div id="imageModal">
+    <span id="modalClose">&times;</span>
+    <img id="modalImg" alt="Zoom Image">
+    <p id="zoomHelp">Use mouse wheel to zoom; drag to pan.</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
